@@ -1,0 +1,56 @@
+--pais de prueba
+insert into g04_Pais values (1,'pais1',1111);
+
+--usuarios de prueba
+insert into g04_Usuario values (999,'apetest1','nomtest1',current_date,'activo','emtest1@gmail.com','passtest1',999,1);
+insert into g04_Usuario values (998,'apetest2','nomtest2',current_date,'activo','emtest2@gmail.com','passtest2',998,1);
+
+--monedas de prueba
+insert into g04_moneda values ('monTest1','moneda test 1','moneda para testeo',current_date,'A','D');
+insert into g04_moneda values ('monTest2','moneda test 2','moneda para testeo',current_date,'A','D');
+
+--mercados de prueba
+insert into g04_Mercado('monTest1/monTest2','monTest1','monTest2',0);
+
+--billeteras inciales de prueba
+insert g04_billetera values (999,'monTest1',100);
+insert g04_billetera values (998,'monTest2',200);
+
+--ordenes de venta
+insert into g04_Orden values (0001,'monTest1/monTest2',999,'venta',current_date,null,2,0.2,'activo');
+insert into g04_Orden values (0002,'monTest1/monTest2',999,'venta',current_date,null,3,0.3,'activo');
+insert into g04_Orden values (0003,'monTest1/monTest2',999,'venta',current_date,null,4,0.4,'activo');
+insert into g04_Orden values (0004,'monTest1/monTest2',999,'venta',current_date,null,5,0.5,'activo');
+insert into g04_Orden values (0005,'monTest1/monTest2',999,'venta',current_date,null,1,1,'activo');
+
+--ordenes de compra
+
+-- prueba el usuario quiere comprar 1 monedaTest1 a un valor de 7 monedatest2
+insert into  g04_Orden values (0006,'monTest1/monTest2',998,'compra',current_date,null,7,1,'activo');
+
+--resultado esperado: 
+	--Se Finaliza la orden de venta 0005 sola
+	--Se Finaliza la orden de compra 0006 
+	--Se crea la billetera faltantes en ambos usuarios
+	--La billetera monedatest1 del usuario 998 queda con 1  
+	--La billetera monedaTest2 del usuario 998 queda con 199 
+	--La billetera monedaTest1 del usuario 999 queda con 99 
+	--La billetera monedaTest2 del usuario 999 queda con 1 
+	
+-- prueba el usuario quiere comprar 3 monedaTest1 a un valor de 100 monedatest2
+insert into  g04_Orden values (0006,'monTest1/monTest2',998,'compra',current_date,null,100,1,'activo');
+
+--resultado esperado: 
+	--Se crea la billetera faltantes en ambos usuarios
+	--Se Finalizan todas las ordenes 
+	--La billetera monedatest1 del usuario 998 queda con 2.4  
+	--La billetera monedaTest2 del usuario 998 queda con 176.6
+	--La billetera monedaTest1 del usuario 999 queda con 76
+	--La billetera monedaTest2 del usuario 999 queda con 24 
+
+-- prueba el usuario quiere comprar 3 monedaTest1 a un valor de 100 monedatest2
+insert into  g04_Orden values (0006,'monTest1/monTest2',998,'compra',current_date,null,0.1,0.1,'activo');
+
+--resultado esperado: 
+	--No pasa nada
+

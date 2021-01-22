@@ -1,0 +1,18 @@
+-- Funcion que retorna un usuario random, la usamos para hacer los insert en orden
+create or replace function fn_G04_getUsuarioRandom() returns integer as $$
+    declare
+        i int;
+        valorId integer;
+    begin
+        select count(*) into i
+        from g04_usuario;
+        if(i > 0) then
+            i:= i-1;
+        end if;
+        select id_usuario into valorId
+        from g04_usuario
+        order by id_usuario
+        offset random() * i
+        limit 1;
+        return valorId;
+    end $$ language 'plpgsql';

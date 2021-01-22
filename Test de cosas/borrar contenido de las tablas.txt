@@ -1,0 +1,6 @@
+delete from g04_orden ;
+delete from g04_mercado ;
+delete from g04_billetera;
+delete from g04_usuario;
+delete from g04_pais;
+delete from g04_moneda;
